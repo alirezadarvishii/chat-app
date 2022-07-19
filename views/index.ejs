@@ -183,7 +183,7 @@
               </div>
               <div class="chat-message clearfix">
                 <div class="input-group mb-0">
-                  <div class="input-group-prepend">
+                  <div class="input-group-prepend" id="send_message">
                     <span class="input-group-text"
                       ><i class="fa fa-send"></i
                     ></span>
@@ -191,6 +191,7 @@
                   <input
                     type="text"
                     class="form-control"
+                    id="message"
                     placeholder="Enter text here..."
                   />
                 </div>
@@ -201,4 +202,6 @@
       </div>
     </div>
   </body>
+  <script src="./socket/socket.js"></script>
+  <script src="./js/app.js"></script>
 </html>
