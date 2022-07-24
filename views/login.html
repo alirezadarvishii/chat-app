@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+    <title>Login Page</title>
+  </head>
+  <body>
+    <section class="container mt-5">
+      <form class="w-25 mx-auto">
+        <h4 class="text-center mb-3 fw-normal">
+          Fill informations to join room
+        </h4>
+
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            name="username"
+            class="form-control"
+            id="floatingInput"
+            placeholder="name@example.com"
+          />
+          <label for="floatingInput">Username</label>
+        </div>
+
+        <select class="form-select mb-4">
+          <option selected>Select a chatroom</option>
+          <option value="chatroom_1">Chatroom One</option>
+          <option value="chatroom_2">Chatroom Two</option>
+          <option value="chatroom_3">Chatroom Three</option>
+        </select>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Join</button>
+      </form>
+    </section>
+  </body>
+  <script>
+    const joiningForm = document.querySelector("form");
+    const username = document.querySelector("input[name=username]");
+    const chatroom = document.querySelector("select");
+
+    joiningForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      localStorage.setItem("username", username.value);
+      localStorage.setItem("chatroom", chatroom.value);
+      window.location.replace("/chatroom");
+    });
+  </script>
+</html>
