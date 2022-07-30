@@ -116,7 +116,7 @@ function handleLogout() {
   window.location.replace("/");
 }
 
-function pvPessage() {
+function pvMessage(messageDto) {
   const modal = document.querySelector(".modal");
   modal.querySelector(
     ".modal-title"
