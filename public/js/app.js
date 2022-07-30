@@ -64,15 +64,16 @@ function sendMessage() {
 }
 
 function sendPvMessage() {
-  const message = pvMessageForm.querySelector("textarea").value;
+  const message = pvMessageForm.querySelector("textarea");
   const to = pvMessageForm.dataset.target;
   const messageDto = {
-    message,
+    message: message.value,
     to,
     sender: username,
     socketId: socket.id,
   };
   socket.emit("pv_message", messageDto);
+  message.value = "";
 }
 
 function addMessage(isSelf, messageDto) {
