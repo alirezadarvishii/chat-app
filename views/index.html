@@ -9,6 +9,12 @@
   </head>
   <body>
     <section style="background-color: #eee">
+      <button
+        class="btn btn-danger ms-auto mt-2 me-2 btn-sm d-block"
+        id="logout"
+      >
+        Logout
+      </button>
       <div class="container py-5">
         <div class="row">
           <div class="col-md-6 col-lg-5 col-xl-4 mb-4 mb-md-0">
@@ -18,88 +24,74 @@
 
             <div class="card">
               <div class="card-body">
-                <ul class="list-unstyled mb-0">
-                  <li class="p-2 border-bottom" style="background-color: #eee">
-                    <a
-                      href="#!"
-                      class="d-flex justify-content-between text-decoration-none"
-                    >
-                      <div class="d-flex flex-row">
-                        <!-- <img
-                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-8.webp"
-                          alt="avatar"
-                          class="rounded-circle d-flex align-self-center me-3 shadow-1-strong"
-                          width="60"
-                        /> -->
-                        <div class="pt-1">
-                          <p class="fw-bold mb-0">John Doe</p>
-                          <!-- <p class="small text-muted">Hello, Are you there?</p> -->
-                        </div>
-                      </div>
-                      <div class="pt-1">
-                        <p class="small text-muted mb-1">Online</p>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
+                <ul class="list-unstyled mb-0 members-list"></ul>
               </div>
             </div>
           </div>
 
           <div class="col-md-6 col-lg-7 col-xl-8">
-            <ul class="list-unstyled">
-              <li class="d-flex justify-content-between mb-4 w-75">
-                <!-- <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                  alt="avatar"
-                  class="rounded-circle d-flex align-self-start me-3 shadow-1-strong"
-                  width="60"
-                /> -->
-                <div class="card">
-                  <div class="card-header d-flex justify-content-between p-3">
-                    <p class="fw-bold mb-0">Brad Pitt</p>
-                    <p class="text-muted small mb-0">
-                      <i class="far fa-clock"></i> 12 mins ago
-                    </p>
-                  </div>
-                  <div class="card-body">
-                    <p class="mb-0">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                      sed do eiusmod tempor incididunt ut labore et dolore magna
-                      aliqua.
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li class="d-flex justify-content-between mb-4 w-75 ms-auto">
-                <div class="card w-100">
-                  <div class="card-header d-flex justify-content-between p-3">
-                    <p class="text-muted small mb-0">
-                      <i class="far fa-clock"></i> 13 mins ago
-                    </p>
-                    <p class="fw-bold mb-0">You</p>
-                  </div>
-                  <div class="card-body">
-                    <p class="mb-0">
-                      Sed ut perspiciatis unde omnis iste natus error sit
-                      voluptatem accusantium doloremque laudantium.
-                    </p>
-                  </div>
-                </div>
-                <!-- <img
-                  src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-5.webp"
-                  alt="avatar"
-                  class="rounded-circle d-flex align-self-start ms-3 shadow-1-strong"
-                  width="60"
-                /> -->
-              </li>
-              <button type="button" class="btn btn-info btn-rounded float-end">
+            <ul class="list-unstyled" id="messages-box"></ul>
+            <form id="send-message">
+              <textarea
+                id="message-text"
+                class="form-control my-3"
+                rows="7"
+                placeholder="Message"
+              ></textarea>
+              <button type="submit" class="btn btn-info btn-rounded float-end">
                 Send
               </button>
-            </ul>
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- Send Pv Message Modal -->
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="pv-message-modal"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Send pv message to:
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">...</div>
+            <form id="pv-message-form" class="p-3" data-target="">
+              <textarea
+                class="form-control"
+                placeholder="Write your message..."
+              ></textarea>
+              <div class="modal-footer p-0 mt-2 pt-2">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">
+                  Send Message
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </div>
     </section>
   </body>
+  <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/socket/socket.js"></script>
+  <script src="/js/app.js"></script>
 </html>

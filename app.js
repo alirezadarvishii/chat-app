@@ -24,14 +24,39 @@ io.on("connection", (socket) => {
     delete usersList[socket.id];
   });
 
-  socket.on("new_user", (args) => {
-    usersList[socket.id] = args.username;
-    io.emit("online_users", usersList);
+  socket.on("new_user", (data) => {
+    socket.join(data.chatroom);
+    usersList[data.chatroom] = {
+      ...usersList[data.chatroom],
+      [socket.id]: data.username,
+    };
+    socket.data.username = data.username;
+    socket.data.chatroom = data.chatroom;
+    io.in(data.chatroom).emit("online_users", usersList[data.chatroom]);
   });
 
-  socket.on("pv_chat", (data) => {
-    io.to(data.to).emit("pv_chat", data.messageText);
+  socket.on("disconnect", () => {
+    if (socket.data.chatroom) {
+      delete usersList[socket.data.chatroom][socket.id];
+      io.in(socket.data.chatroom).emit(
+        "online_users",
+        usersList[socket.data.chatroom]
+      );
+    }
+  });
+
+  socket.on("new_message", (messageDto) => {
+    socket.broadcast.emit("new_message", messageDto);
+  });
+
+  socket.on("pv_message", (data) => {
+    const messageDto = {
+      message: data.message,
+      sender: data.sender,
+      senderId: data.socketId,
+    };
+    socket.to(data.to).emit("pv_message", messageDto);
   });
 });
 
-httpServer.listen(3000, () => console.log("Application started...!"));
+httpServer.listen(3000, () => console.log("Application started"));
