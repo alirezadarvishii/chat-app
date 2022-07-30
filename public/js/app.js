@@ -8,6 +8,7 @@ const messagesBox = document.querySelector("#messages-box");
 const logout = document.querySelector("#logout");
 const pvMessageForm = document.querySelector("#pv-message-form");
 const pvModal = document.querySelector(".modal");
+const modal = new bootstrap.Modal(".modal");
 
 // Variables
 const username = localStorage.getItem("username");
@@ -74,6 +75,7 @@ function sendPvMessage() {
   };
   socket.emit("pv_message", messageDto);
   message.value = "";
+  modal.hide();
 }
 
 function addMessage(isSelf, messageDto) {
@@ -118,14 +120,12 @@ function handleLogout() {
 }
 
 function pvMessage(messageDto) {
-  const modal = document.querySelector(".modal");
-  modal.querySelector(
+  pvModal.querySelector(
     ".modal-title"
   ).textContent = `Send pv message to: ${messageDto.sender}`;
-  modal.querySelector(".modal-body").textContent = messageDto.message;
-  modal.querySelector("form").dataset.target = messageDto.senderId;
-  const pvModal = new bootstrap.Modal(".modal");
-  pvModal.show();
+  pvModal.querySelector(".modal-body").textContent = messageDto.message;
+  pvModal.querySelector("form").dataset.target = messageDto.senderId;
+  modal.show();
 }
 
 // Socket Events
