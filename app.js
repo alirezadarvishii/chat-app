@@ -19,7 +19,7 @@ app.get("/chatroom", (req, res) => {
 });
 
 const usersList = {};
-io.on("connection", (socket) => {
+const onConnection = (socket) => {
   socket.on("disconnect", () => {
     delete usersList[socket.id];
   });
@@ -57,6 +57,8 @@ io.on("connection", (socket) => {
     };
     socket.to(data.to).emit("pv_message", messageDto);
   });
-});
+};
+
+io.on("connection", onConnection);
 
 httpServer.listen(3000, () => console.log("Application started"));
