@@ -1,6 +1,7 @@
 const path = require("path");
 const { createServer } = require("http");
 const express = require("express");
+const dotenv = require("dotenv");
 
 const app = express();
 const httpServer = createServer(app);
@@ -9,6 +10,7 @@ const handler = require("./handler");
 
 const io = new Server(httpServer);
 const eventHandler = handler(io);
+dotenv.config({ path: "./config/.env" });
 
 app.use(express.static("public"));
 
@@ -34,4 +36,8 @@ const onConnection = (socket) => {
 
 io.on("connection", onConnection);
 
-httpServer.listen(3000, () => console.log("Application started"));
+const { PORT } = process.env;
+
+httpServer.listen(PORT, () => {
+  console.log(`Application running on port ${PORT}`);
+});
